@@ -1,0 +1,53 @@
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: Abc123...
+      MYSQL_DATABASE: studentdb
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+  schoolspaceservices:
+    build:
+      context: ../school-space-services
+      dockerfile: Dockerfile
+    container_name: schoolSpaceServices
+    image: schoolspaceservices
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/studentdb?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Abc123...
+    labels:
+      ARTIFACT_CATEGORY: Computation
+      Replicas: 1
+    networks:
+      - backend
+
+  schoolspaceclient:
+    build:
+      context: ../school-space-client
+      dockerfile: Dockerfile
+    container_name: schoolSpaceClient
+    ports:
+      - "3000:80"
+    depends_on:
+      - schoolspaceservices
+    environment:
+      - REACT_APP_API_URL=http://schoolspaceservices:8080
+    networks:
+      - backend
+
+networks:
+  backend:
