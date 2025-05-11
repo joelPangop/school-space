@@ -1,0 +1,15 @@
+POST http://localhost:8080/api/course
+Content-Type: application/json
+
+{
+  "id":"",
+  "name": "test",
+  "email":"t@t.ca",
+  "age": 25
+}
+
+###
+### GET request to example server
+POST http://localhost:8080
+
+###

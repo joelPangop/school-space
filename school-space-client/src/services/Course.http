@@ -1,0 +1,16 @@
+PUT http://localhost:8080/api/course/10
+Content-Type: application/json
+
+{
+  "_id": 10,
+  "_name":"MAT210",
+  "_sigle":"MAT210-H25",
+  "_students": [19],
+  "_teachers": [1]
+}
+
+###
+### GET request to example server
+GET http://localhost:8080/api/course
+
+###
