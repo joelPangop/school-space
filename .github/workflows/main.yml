@@ -39,13 +39,11 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-      
-      - name: Make mvnw executable
-        run: chmod +x ./school-space-services/mvnw
+ 
 
       - name: Build JAR
-        working-directory: school-space-services
-        run: ./mvn clean package -DskipTests
+        working-directory: .../school-space-services
+        run: mvn clean package -DskipTests
         
       - name: Build and run tests
         working-directory: school-space-services
