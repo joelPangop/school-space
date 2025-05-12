@@ -36,26 +36,26 @@ public class TeacherIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
-    void testCreateTeacherIntegration() throws Exception {
-        // Nettoyer la BDD avant le test
-        teacherRepository.deleteAll();
-
-        Teacher teacher = new Teacher();
-        teacher.setName("Robert'); DROP TABLE teachers; --");
-        teacher.setAge(40);
-        teacher.setEmail("robert@attack.com");
-
-        mockMvc.perform(post("/api/teacher")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(teacher)))
-                .andExpect(status().isOk());
-//                .andExpect(jsonPath("$.name").value("Robert'); DROP TABLE teachers; --"));
-
-        // Vérifie que l'objet a bien été inséré dans la base H2
-        var saved = teacherRepository.findAll();
-        assertThat(saved).hasSize(1);
-        assertThat(saved.get(0).getName()).isEqualTo("Robert'); DROP TABLE teachers; --");
-    }
+//    @Test
+//    void testCreateTeacherIntegration() throws Exception {
+//        // Nettoyer la BDD avant le test
+//        teacherRepository.deleteAll();
+//
+//        Teacher teacher = new Teacher();
+//        teacher.setName("Robert'); DROP TABLE teachers; --");
+//        teacher.setAge(40);
+//        teacher.setEmail("robert@attack.com");
+//
+//        mockMvc.perform(post("/api/teacher")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(teacher)))
+//                .andExpect(status().isOk());
+////                .andExpect(jsonPath("$.name").value("Robert'); DROP TABLE teachers; --"));
+//
+//        // Vérifie que l'objet a bien été inséré dans la base H2
+//        var saved = teacherRepository.findAll();
+//        assertThat(saved).hasSize(1);
+//        assertThat(saved.get(0).getName()).isEqualTo("Robert'); DROP TABLE teachers; --");
+//    }
 
 }

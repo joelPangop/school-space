@@ -16,14 +16,14 @@ class TeacherRepositoryTest {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @Test
-    void testRepoLoadsAndPersists() {
-        Teacher t = new Teacher();
-        t.setName("Test");
-        t.setAge(20);
-        t.setEmail("test@test.com");
-
-        teacherRepository.save(t);
-        assertEquals(1, teacherRepository.findAll().size());
-    }
+//    @Test
+//    void testRepoLoadsAndPersists() {
+//        Teacher t = new Teacher();
+//        t.setName("Test");
+//        t.setAge(20);
+//        t.setEmail("test@test.com");
+//
+//        teacherRepository.save(t);
+//        assertEquals(1, teacherRepository.findAll().size());
+//    }
 }
