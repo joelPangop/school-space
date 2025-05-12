@@ -29,10 +29,7 @@ public class StudentServices {
 
     public StudentDto getStudent(Integer id) {
         Optional<Student> student = studentRepository.findById(id);
-        if (student.isPresent()) {
-            return getStudentDto(student.get());
-        }
-        return null;
+        return student.map(this::getStudentDto).orElse(null);
     }
 
     @Transactional
@@ -57,12 +54,21 @@ public class StudentServices {
                 .orElseThrow(() -> new RuntimeException("not found"));
     }
 
-    private StudentDto getStudentDto(Student student) {
+    public StudentDto getStudentDto(Student student) {
         StudentDto studentDto = new StudentDto();
         studentDto.setId(student.getId());
         studentDto.setName(student.getName());
         studentDto.setAge(student.getAge());
         studentDto.setEmail(student.getEmail());
         return studentDto;
+    }
+
+    public Student getStudent(StudentDto studentDto) {
+        Student student = new Student();
+        student.setId(studentDto.getId());
+        student.setName(studentDto.getName());
+        student.setAge(studentDto.getAge());
+        student.setEmail(studentDto.getEmail());
+        return student;
     }
 }
