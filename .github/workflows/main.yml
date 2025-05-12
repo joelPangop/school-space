@@ -40,6 +40,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Build JAR
+        working-directory: school-space-services
+        run: ./mvn clean package -DskipTests
+        
       - name: Build and run tests
         working-directory: school-space-services
         run: |
