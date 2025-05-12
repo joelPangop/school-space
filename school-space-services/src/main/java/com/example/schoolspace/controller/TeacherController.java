@@ -38,8 +38,8 @@ public class TeacherController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Teacher> update(@PathVariable Integer id, @RequestBody Teacher teacher) {
-        Teacher updateTeacher = teacherServices.updateTeacher(id, teacher);
+    public ResponseEntity<TeacherDto> update(@PathVariable Integer id, @RequestBody TeacherDto teacher) {
+        TeacherDto updateTeacher = teacherServices.updateTeacher(id, teacher);
         return ResponseEntity.ok(updateTeacher);
     }
 

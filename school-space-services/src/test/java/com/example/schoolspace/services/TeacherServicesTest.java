@@ -84,7 +84,7 @@ public class TeacherServicesTest {
         existing.setEmail("old@example.com");
 
         // L'objet envoyé pour mise à jour
-        Teacher updates = new Teacher();
+        TeacherDto updates = new TeacherDto();
         updates.setName("New Name");
         updates.setAge(45);
         updates.setEmail("new@example.com");
@@ -94,7 +94,7 @@ public class TeacherServicesTest {
         when(teacherRepository.save(any(Teacher.class))).thenAnswer(i -> i.getArgument(0));
 
         // Appel de la méthode réelle
-        Teacher result = teacherServices.updateTeacher(id, updates);
+        TeacherDto result = teacherServices.updateTeacher(id, updates);
 
         // Vérifications
         assertEquals("New Name", result.getName());
@@ -141,7 +141,6 @@ public class TeacherServicesTest {
     @Test
     void testFindByIdWithSqlInjectionLikeInput() {
         String userInput = "1 OR 1=1"; // typique d'une tentative d'injection
-        
         assertThrows(NumberFormatException.class, () -> {
             Integer id = Integer.valueOf(userInput); // simulate what would happen if input wasn't validated
             teacherServices.getTeacherById(id);

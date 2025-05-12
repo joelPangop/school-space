@@ -42,15 +42,16 @@ public class TeacherServices {
     }
 
     @Transactional
-    public Teacher updateTeacher(Integer id, Teacher teacher) {
-        return teacherRepository.findById(id)
+    public TeacherDto updateTeacher(Integer id, TeacherDto teacherDto) {
+        Teacher teacher = teacherRepository.findById(id)
                 .map(existingTeacher -> {
-                    existingTeacher.setName(teacher.getName());
-                    existingTeacher.setEmail(teacher.getEmail());
-                    existingTeacher.setAge(teacher.getAge());
+                    existingTeacher.setName(teacherDto.getName());
+                    existingTeacher.setEmail(teacherDto.getEmail());
+                    existingTeacher.setAge(teacherDto.getAge());
                     return teacherRepository.save(existingTeacher);
                 })
                 .orElseThrow(() -> new RuntimeException("not found"));
+        return getTeacherDto(teacher);
     }
 
     public Teacher getTeacher(TeacherDto teacherDto) {
