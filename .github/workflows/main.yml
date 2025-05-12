@@ -42,7 +42,7 @@ jobs:
  
 
       - name: Build JAR
-        working-directory: .../school-space-services
+        working-directory: school-space-services
         run: mvn clean package -DskipTests
         
       - name: Build and run tests
