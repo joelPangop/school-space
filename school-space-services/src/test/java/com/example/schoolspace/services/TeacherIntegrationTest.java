@@ -23,9 +23,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-@EntityScan(basePackages = "com.example.schoolspace.model")
-@EnableJpaRepositories(basePackages = "com.example.schoolspace.repository")
-@ComponentScan(basePackages = "com.example.schoolspace")
 public class TeacherIntegrationTest {
 
     @Autowired
