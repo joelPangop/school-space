@@ -1,12 +1,12 @@
-package com.example.studentspace.service;
+package com.example.schoolspace.service;
 
-import com.example.studentspace.dto.CoursDto;
-import com.example.studentspace.model.Course;
-import com.example.studentspace.model.Student;
-import com.example.studentspace.model.Teacher;
-import com.example.studentspace.repository.CourseRepository;
-import com.example.studentspace.repository.StudentRepository;
-import com.example.studentspace.repository.TeacherRepository;
+import com.example.schoolspace.dto.CoursDto;
+import com.example.schoolspace.model.Course;
+import com.example.schoolspace.model.Student;
+import com.example.schoolspace.model.Teacher;
+import com.example.schoolspace.repository.CourseRepository;
+import com.example.schoolspace.repository.StudentRepository;
+import com.example.schoolspace.repository.TeacherRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,22 +42,10 @@ public class CourseServices {
     }
 
     @Transactional
-    public Course save(CoursDto course) {
+    public CoursDto save(CoursDto course) {
         Course newCourse = getCourse(course);
-//        Course newCourse = new Course();
-//        newCourse.setName(course.getName());
-//        newCourse.setSigle(course.getSigle());
-//        if (course.getStudents() != null && !course.getStudents().isEmpty()) {
-//
-//            // Charger les entités Student depuis la base
-//            List<Integer> studentIds = course.getStudents();
-//            List<Integer> teacherIds = course.getTeachers();
-//            List<Student> studentsFromDb = studentRepository.findAllById(studentIds);
-//            List<Teacher> teachersFromDb = teacherRepository.findAllById(teacherIds);
-//            newCourse.getStudents().addAll(studentsFromDb);
-//            newCourse.getTeachers().addAll(teachersFromDb);
-//        }
-        return courseRepository.save(newCourse);
+        Course savedCourse = courseRepository.save(newCourse);
+        return getCourseDto(savedCourse);
     }
 
     @Transactional
@@ -66,20 +54,20 @@ public class CourseServices {
     }
 
     @Transactional
-    public Course updateCourse(Integer id, CoursDto course) {
+    public Course updateCourse(Integer id, CoursDto coursDto) {
 
         return courseRepository.findById(id)
                 .map(existingCourse -> {
-                    existingCourse.setName(course.getName());
-                    existingCourse.setSigle(course.getSigle());
-                    if (course.getStudents() != null && !course.getStudents().isEmpty()) {
+                    existingCourse.setName(coursDto.getName());
+                    existingCourse.setSigle(coursDto.getSigle());
+                    if (coursDto.getStudents() != null && !coursDto.getStudents().isEmpty()) {
                         // Vider les anciens
                         existingCourse.getStudents().clear();
                         existingCourse.getTeachers().clear();
 
                         // Charger les entités Student depuis la base
-                        List<Integer> studentIds = course.getStudents();
-                        List<Integer> teachersIds = course.getTeachers();
+                        List<Integer> studentIds = coursDto.getStudents();
+                        List<Integer> teachersIds = coursDto.getTeachers();
                         List<Student> studentsFromDb = studentRepository.findAllById(studentIds);
                         List<Teacher> teachersFromDb = teacherRepository.findAllById(teachersIds);
                         existingCourse.getStudents().addAll(studentsFromDb);

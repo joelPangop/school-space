@@ -1,6 +1,6 @@
-package com.example.studentspace.repository;
+package com.example.schoolspace.repository;
 
-import com.example.studentspace.model.Student;
+import com.example.schoolspace.model.Student;
 import org.springframework.stereotype.Repository;
 
 @Repository

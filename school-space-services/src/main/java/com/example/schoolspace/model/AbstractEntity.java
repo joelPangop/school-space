@@ -1,4 +1,4 @@
-package com.example.studentspace.model;
+package com.example.schoolspace.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

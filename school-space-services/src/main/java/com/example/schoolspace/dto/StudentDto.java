@@ -1,4 +1,4 @@
-package com.example.studentspace.dto;
+package com.example.schoolspace.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

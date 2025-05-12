@@ -1,6 +1,6 @@
-package com.example.studentspace.service;
+package com.example.schoolspace.service;
 
-import com.example.studentspace.model.AbstractEntity;
+import com.example.schoolspace.model.AbstractEntity;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,8 +1,8 @@
-package com.example.studentspace.controller;
+package com.example.schoolspace.controller;
 
-import com.example.studentspace.dto.CoursDto;
-import com.example.studentspace.model.Course;
-import com.example.studentspace.service.CourseServices;
+import com.example.schoolspace.dto.CoursDto;
+import com.example.schoolspace.model.Course;
+import com.example.schoolspace.service.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class CourseController {
     }
 
     @PostMapping
-    public Course create(@RequestBody CoursDto course) {
+    public CoursDto create(@RequestBody CoursDto course) {
         return courseServices.save(course);
     }
 

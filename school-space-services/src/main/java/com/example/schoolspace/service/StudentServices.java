@@ -1,8 +1,8 @@
-package com.example.studentspace.service;
+package com.example.schoolspace.service;
 
-import com.example.studentspace.dto.StudentDto;
-import com.example.studentspace.model.Student;
-import com.example.studentspace.repository.StudentRepository;
+import com.example.schoolspace.dto.StudentDto;
+import com.example.schoolspace.model.Student;
+import com.example.schoolspace.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

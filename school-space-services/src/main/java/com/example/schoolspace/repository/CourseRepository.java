@@ -1,6 +1,6 @@
-package com.example.studentspace.repository;
+package com.example.schoolspace.repository;
 
-import com.example.studentspace.model.Course;
+import com.example.schoolspace.model.Course;
 
 public interface CourseRepository extends AbstractRepository<Course, Integer> {
 }

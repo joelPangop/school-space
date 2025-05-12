@@ -1,15 +1,13 @@
-package com.example.studentspace.service;
+package com.example.schoolspace.service;
 
-import com.example.studentspace.dto.CoursDto;
-import com.example.studentspace.dto.TeacherDto;
-import com.example.studentspace.model.Course;
-import com.example.studentspace.model.Student;
-import com.example.studentspace.model.Teacher;
-import com.example.studentspace.repository.TeacherRepository;
+import com.example.schoolspace.dto.TeacherDto;
+import com.example.schoolspace.model.Teacher;
+import com.example.schoolspace.repository.TeacherRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +17,11 @@ public class TeacherServices {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public List<Teacher> getAllTeachers() {
-        return teacherRepository.findAll();
+    public List<TeacherDto> getAllTeachers() {
+        List<Teacher> teachers = teacherRepository.findAll();
+        List<TeacherDto> teacherDtos = new ArrayList<>();
+        teachers.forEach(teacher -> teacherDtos.add(getTeacherDto(teacher)));
+        return teacherDtos;
     }
 
     public TeacherDto getTeacherById(int id) {
@@ -29,8 +30,9 @@ public class TeacherServices {
     }
 
     @Transactional
-    public Teacher save(Teacher teacher) {
-        return teacherRepository.save(teacher);
+    public Teacher save(TeacherDto teacher) {
+        Teacher newTeacher = getTeacher(teacher);
+        return teacherRepository.save(newTeacher);
     }
 
     @Transactional

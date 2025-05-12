@@ -1,17 +1,14 @@
-package com.example.studentspace.controller;
+package com.example.schoolspace.controller;
 
-import com.example.studentspace.dto.TeacherDto;
-import com.example.studentspace.model.Teacher;
-import com.example.studentspace.service.TeacherServices;
+import com.example.schoolspace.dto.TeacherDto;
+import com.example.schoolspace.model.Teacher;
+import com.example.schoolspace.service.TeacherServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -24,7 +21,7 @@ public class TeacherController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<Teacher> getAllTeachers() {
+    public List<TeacherDto> getAllTeachers() {
         return teacherServices.getAllTeachers();
     }
 
@@ -36,7 +33,7 @@ public class TeacherController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Teacher create(@RequestBody Teacher teacher) {
+    public Teacher create(@RequestBody TeacherDto teacher) {
         return teacherServices.save(teacher);
     }
 
