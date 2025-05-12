@@ -51,17 +51,17 @@ public class TeacherServicesTest {
 
     @Test
     void testSaveTeacher() {
-        Teacher teacher = new Teacher();
+        TeacherDto teacher = new TeacherDto();
         teacher.setId(1);
         teacher.setName("John Doe");
         teacher.setAge(40);
         teacher.setEmail("john@example.com");
 
         // Simuler le comportement du repository : retourne le même objet
-        when(teacherRepository.save(teacher)).thenReturn(teacher);
+        when(teacherRepository.save(teacherServices.getTeacher(teacher))).thenReturn(teacherServices.getTeacher(teacher));
 
         // Appel réel de la méthode à tester
-        Teacher result = teacherServices.save(teacher);
+        TeacherDto result = teacherServices.save(teacher);
 
         // Vérifications
         assertNotNull(result);
@@ -69,7 +69,7 @@ public class TeacherServicesTest {
         assertEquals("john@example.com", result.getEmail());
 
         // Vérifie que save() a bien été appelé une fois
-        verify(teacherRepository, times(1)).save(teacher);
+        verify(teacherRepository, times(1)).save(teacherServices.getTeacher(teacher));
     }
 
     @Test
@@ -128,14 +128,14 @@ public class TeacherServicesTest {
 
     @Test
     void testSaveWithSqlInjectionInName() {
-        Teacher malicious = new Teacher();
+        TeacherDto malicious = new TeacherDto();
         malicious.setName("Robert'); DROP TABLE teachers; --");
         malicious.setEmail("hack@example.com");
         malicious.setAge(30);
-        when(teacherRepository.save(malicious)).thenReturn(malicious);
-        Teacher result = teacherServices.save(malicious);
+        when(teacherRepository.save(teacherServices.getTeacher(malicious))).thenReturn(teacherServices.getTeacher(malicious));
+        TeacherDto result = teacherServices.save(malicious);
         assertEquals("Robert'); DROP TABLE teachers; --", result.getName());
-        verify(teacherRepository).save(malicious);
+        verify(teacherRepository).save(teacherServices.getTeacher(malicious));
     }
 
     @Test

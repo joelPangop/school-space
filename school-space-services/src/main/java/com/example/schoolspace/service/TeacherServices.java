@@ -53,7 +53,7 @@ public class TeacherServices {
                 .orElseThrow(() -> new RuntimeException("not found"));
     }
 
-    private Teacher getTeacher(TeacherDto teacherDto) {
+    public Teacher getTeacher(TeacherDto teacherDto) {
         Teacher teacher = new Teacher();
         teacher.setId(teacherDto.getId());
         teacher.setName(teacherDto.getName());
@@ -62,7 +62,7 @@ public class TeacherServices {
         return teacher;
     }
 
-    private TeacherDto getTeacherDto(Teacher teacher) {
+    public TeacherDto getTeacherDto(Teacher teacher) {
         TeacherDto teacherDto = new TeacherDto();
         teacherDto.setId(teacher.getId());
         teacherDto.setName(teacher.getName());
