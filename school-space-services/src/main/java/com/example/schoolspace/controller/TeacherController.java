@@ -33,7 +33,7 @@ public class TeacherController {
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Teacher create(@RequestBody TeacherDto teacher) {
+    public TeacherDto create(@RequestBody TeacherDto teacher) {
         return teacherServices.save(teacher);
     }
 

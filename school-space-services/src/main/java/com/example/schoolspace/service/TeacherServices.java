@@ -30,9 +30,10 @@ public class TeacherServices {
     }
 
     @Transactional
-    public Teacher save(TeacherDto teacher) {
+    public TeacherDto save(TeacherDto teacher) {
         Teacher newTeacher = getTeacher(teacher);
-        return teacherRepository.save(newTeacher);
+        Teacher savedTeacher = teacherRepository.save(newTeacher);
+        return getTeacherDto(savedTeacher);
     }
 
     @Transactional
