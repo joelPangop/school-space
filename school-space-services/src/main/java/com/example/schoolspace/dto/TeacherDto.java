@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TeacherDto {
 
     @JsonProperty("_id")
-    private int id;
+    private Integer id;
 
     @JsonProperty("_name")
     private String name;
@@ -16,11 +16,11 @@ public class TeacherDto {
     @JsonProperty("_email")
     private String email;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
