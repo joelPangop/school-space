@@ -42,15 +42,7 @@ jobs:
         
       - name: Build and run tests
         working-directory: school-space-services
-        run: |
-          chmod +x mvnw
-          ./mvnw test -Dspring.profiles.active=test \
-            -Dspring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1 \
-            -Dspring.datasource.driver-class-name=org.h2.Driver \
-            -Dspring.datasource.username=sa \
-            -Dspring.datasource.password= \
-            -Dspring.jpa.database-platform=org.hibernate.dialect.H2Dialect \
-            -Dspring.jpa.hibernate.ddl-auto=create-drop
+        run: mvn test -Dspring.profiles.active=test -Dspring.datasource.driver-class-name=org.h2.Driver
 
   docker-build:
     runs-on: ubuntu-latest
