@@ -1,46 +1,50 @@
 import React from "react";
-import {useTeacherFormController} from "../controller/useTeacherFormController";
+import { useTeacherFormController } from "../controller/useTeacherFormController";
 
-const teacherFormView: React.FC = () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {teacher, handleChange, handleSubmit} = useTeacherFormController();
+const TeacherFormView: React.FC = () => {
+    const { teacher, handleChange, handleSubmit } = useTeacherFormController();
+
     return (
-        <div style={{padding: '2rem'}}>
+        <div style={{ padding: '2rem' }}>
             <h2>Formulaire Enseignant</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Nom : </label>
+                    <label htmlFor="name">Nom : </label>
                     <input
+                        id="name"
                         type="text"
                         name="name"
-                        value={teacher && teacher.name !== undefined ? teacher.name : ''}
+                        value={teacher?.name ?? ''}
                         onChange={handleChange}
                     />
                 </div>
-                <br/>
+                <br />
                 <div>
-                    <label>Email : </label>
+                    <label htmlFor="email">Email : </label>
                     <input
+                        id="email"
                         type="text"
                         name="email"
-                        value={teacher && teacher.email !== undefined ? teacher.email : ''}
+                        value={teacher?.email ?? ''}
                         onChange={handleChange}
                     />
                 </div>
-                <br/>
+                <br />
                 <div>
-                    <label>Âge : </label>
+                    <label htmlFor="age">Âge : </label>
                     <input
+                        id="age"
                         type="number"
                         name="age"
-                        value={teacher && teacher.age !== undefined ? teacher.age : ''}
+                        value={teacher?.age ?? ''}
                         onChange={handleChange}
                     />
                 </div>
-                <br/>
+                <br />
                 <button type="submit">Soumettre</button>
             </form>
         </div>
-    )
+    );
 };
-export default teacherFormView;
+
+export default TeacherFormView;
