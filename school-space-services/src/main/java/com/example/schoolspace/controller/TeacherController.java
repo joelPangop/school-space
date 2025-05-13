@@ -22,12 +22,12 @@ public class TeacherController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<TeacherDto> getAllTeachers() {
-        return teacherServices.getAllTeachers();
+        return teacherServices.getAll();
     }
 
     @GetMapping("/{id}")
     public TeacherDto getTeacherById(@PathVariable Integer id) {
-        return teacherServices.getTeacherById(id);
+        return teacherServices.getById(id);
     }
 
     @PostMapping(
@@ -39,12 +39,12 @@ public class TeacherController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TeacherDto> update(@PathVariable Integer id, @RequestBody TeacherDto teacher) {
-        TeacherDto updateTeacher = teacherServices.updateTeacher(id, teacher);
+        TeacherDto updateTeacher = teacherServices.update(id, teacher);
         return ResponseEntity.ok(updateTeacher);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        teacherServices.deleteTeacher(id);
+        teacherServices.delete(id);
     }
 }

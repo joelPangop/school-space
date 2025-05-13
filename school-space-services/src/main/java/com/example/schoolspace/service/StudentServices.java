@@ -1,7 +1,9 @@
 package com.example.schoolspace.service;
 
 import com.example.schoolspace.dto.StudentDto;
+import com.example.schoolspace.dto.StudentMapper;
 import com.example.schoolspace.model.Student;
+import com.example.schoolspace.model.Teacher;
 import com.example.schoolspace.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,63 +14,56 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentServices {
+public class StudentServices implements IServices<StudentDto, Student>{
 
     @Autowired
     private StudentRepository studentRepository;
 
-    public List<StudentDto> getAllStudents() {
+    @Autowired
+    private StudentMapper studentMapper;
+
+    @Override
+    public List<StudentDto> getAll() {
         List<Student> students = studentRepository.findAll();
         List<StudentDto> studentDtos = new ArrayList<>();
         for (Student student : students) {
-            StudentDto studentDto = getStudentDto(student);
+            StudentDto studentDto = studentMapper.toDto(student);
             studentDtos.add(studentDto);
         }
         return studentDtos;
     }
 
-    public StudentDto getStudent(Integer id) {
+    @Override
+    public StudentDto getById(Integer id) {
         Optional<Student> student = studentRepository.findById(id);
-        return student.map(this::getStudentDto).orElse(null);
+        return studentMapper.toDto(student.get());
     }
 
+    @Override
     @Transactional
-    public Student save(Student student) {
-        return studentRepository.save(student);
+    public StudentDto save(StudentDto studentDto) {
+        Student student = studentMapper.toEntity(studentDto);
+        Student newStudent = studentRepository.save(student);
+        return studentMapper.toDto(newStudent);
     }
 
+    @Override
     @Transactional
-    public void deleteStudent(Integer id) {
+    public void delete(Integer id) {
         studentRepository.deleteById(id);
     }
 
+    @Override
     @Transactional
-    public Student updateStudent(Integer id, Student student) {
-        return studentRepository.findById(id)
+    public StudentDto update(Integer id, StudentDto studentDto) {
+        Student student = studentRepository.findById(id)
                 .map(existingStudent -> {
-                    existingStudent.setName(student.getName());
-                    existingStudent.setEmail(student.getEmail());
-                    existingStudent.setAge(student.getAge());
+                    existingStudent.setName(studentDto.getName());
+                    existingStudent.setEmail(studentDto.getEmail());
+                    existingStudent.setAge(studentDto.getAge());
                     return studentRepository.save(existingStudent);
                 })
                 .orElseThrow(() -> new RuntimeException("not found"));
-    }
-
-    public StudentDto getStudentDto(Student student) {
-        StudentDto studentDto = new StudentDto();
-        studentDto.setId(student.getId());
-        studentDto.setName(student.getName());
-        studentDto.setAge(student.getAge());
-        studentDto.setEmail(student.getEmail());
-        return studentDto;
-    }
-
-    public Student getStudent(StudentDto studentDto) {
-        Student student = new Student();
-        student.setId(studentDto.getId());
-        student.setName(studentDto.getName());
-        student.setAge(studentDto.getAge());
-        student.setEmail(studentDto.getEmail());
-        return student;
+        return studentMapper.toDto(student);
     }
 }

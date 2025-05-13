@@ -14,7 +14,7 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY target/school-space-services-0.0.1-SNAPSHOT.jar app.jar
 COPY entrypoint.sh entrypoint.sh
 RUN chmod +x entrypoint.sh
 

@@ -9,10 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class StudentDto {
-
-    @JsonProperty("_id")
-    private int id;
+public class StudentDto extends Dto{
 
     @JsonProperty("_name")
     private String name;
@@ -22,14 +19,6 @@ public class StudentDto {
 
     @JsonProperty("_email")
     private String email;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

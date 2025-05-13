@@ -2,10 +2,7 @@ package com.example.schoolspace.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TeacherDto {
-
-    @JsonProperty("_id")
-    private Integer id;
+public class TeacherDto extends Dto {
 
     @JsonProperty("_name")
     private String name;
@@ -15,14 +12,6 @@ public class TeacherDto {
 
     @JsonProperty("_email")
     private String email;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

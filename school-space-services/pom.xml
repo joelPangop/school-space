@@ -90,4 +90,15 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>my-repo-id</id>
+            <url>https://your.repo.url/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>my-repo-snapshots</id>
+            <url>https://your.repo.url/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>

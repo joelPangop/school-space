@@ -1,6 +1,6 @@
 package com.example.schoolspace.controller;
 
-import com.example.schoolspace.dto.CoursDto;
+import com.example.schoolspace.dto.CourseDto;
 import com.example.schoolspace.model.Course;
 import com.example.schoolspace.service.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,28 +18,28 @@ public class CourseController {
     private CourseServices courseServices;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CoursDto> getAllCourses() {
-        return courseServices.getAllCours();
+    public List<CourseDto> getAllCourses() {
+        return courseServices.getAll();
     }
 
     @GetMapping("/{id}")
-    public CoursDto getTeacherById(@PathVariable Integer id) {
-        return courseServices.getCoursTeacherById(id);
+    public CourseDto getTeacherById(@PathVariable Integer id) {
+        return courseServices.getById(id);
     }
 
     @PostMapping
-    public CoursDto create(@RequestBody CoursDto course) {
+    public CourseDto create(@RequestBody CourseDto course) {
         return courseServices.save(course);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> update(@PathVariable Integer id, @RequestBody CoursDto course) {
-        Course updateCourse = courseServices.updateCourse(id, course);
+    public ResponseEntity<CourseDto> update(@PathVariable Integer id, @RequestBody CourseDto course) {
+        CourseDto updateCourse = courseServices.update(id, course);
         return ResponseEntity.ok(updateCourse);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        courseServices.deleteCourse(id);
+        courseServices.delete(id);
     }
 }

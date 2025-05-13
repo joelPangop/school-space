@@ -10,10 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CoursDto {
-
-    @JsonProperty("_id")
-    private Integer id;
+public class CourseDto extends Dto {
 
     @JsonProperty("_name")
     private String name;
@@ -26,14 +23,6 @@ public class CoursDto {
 
     @JsonProperty("_teachers")
     private List<Integer> teachers;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

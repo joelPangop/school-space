@@ -22,29 +22,29 @@ public class StudentController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public List<StudentDto> getAllStudents() {
-        return studentServices.getAllStudents();
+        return studentServices.getAll();
     }
 
     @GetMapping("/{id}")
     public StudentDto getStudentById(@PathVariable Integer id) {
-        return studentServices.getStudent(id);
+        return studentServices.getById(id);
     }
 
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public Student create(@RequestBody Student student) {
+    public StudentDto create(@RequestBody StudentDto student) {
         return studentServices.save(student);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> update(@PathVariable Integer id, @RequestBody Student student) {
-        Student updatedStudent = studentServices.updateStudent(id, student);
+    public ResponseEntity<StudentDto> update(@PathVariable Integer id, @RequestBody StudentDto student) {
+        StudentDto updatedStudent = studentServices.update(id, student);
         return ResponseEntity.ok(updatedStudent);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
-        studentServices.deleteStudent(id);
+        studentServices.delete(id);
     }
 }

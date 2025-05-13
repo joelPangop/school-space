@@ -35,16 +35,15 @@ public class TeacherIntegrationTest {
         teacherRepository.deleteAll();
 
         TeacherDto teacher = new TeacherDto();
-        teacher.setId(null);
         teacher.setName("Robert'); DROP TABLE teachers; --");
         teacher.setAge(40);
         teacher.setEmail("robert@attack.com");
+        // Ne pas setter l'id !
 
         mockMvc.perform(post("/api/teacher")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(teacher)))
                 .andExpect(status().isOk());
-//                .andExpect(jsonPath("$.name").value("Robert'); DROP TABLE teachers; --"));
 
         // Vérifie que l'objet a bien été inséré dans la base H2
         var saved = teacherRepository.findAll();

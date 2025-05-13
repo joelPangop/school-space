@@ -1,6 +1,7 @@
 package com.example.schoolspace.service;
 
 import com.example.schoolspace.dto.TeacherDto;
+import com.example.schoolspace.dto.TeacherMapper;
 import com.example.schoolspace.model.Teacher;
 import com.example.schoolspace.repository.TeacherRepository;
 import jakarta.transaction.Transactional;
@@ -12,37 +13,42 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TeacherServices {
+public class TeacherServices implements IServices<TeacherDto, Teacher>{
 
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public List<TeacherDto> getAllTeachers() {
+    @Autowired
+    private TeacherMapper teacherMapper;
+
+
+    public List<TeacherDto> getAll() {
         List<Teacher> teachers = teacherRepository.findAll();
         List<TeacherDto> teacherDtos = new ArrayList<>();
-        teachers.forEach(teacher -> teacherDtos.add(getTeacherDto(teacher)));
+        teachers.forEach(teacher -> teacherDtos.add(teacherMapper.toDto(teacher)));
         return teacherDtos;
     }
 
-    public TeacherDto getTeacherById(int id) {
+    public TeacherDto getById(Integer id) {
         Optional<Teacher> teacher = teacherRepository.findById(id);
-        return teacher.map(this::getTeacherDto).orElse(null);
+        assert teacher.orElse(null) != null;
+        return teacherMapper.toDto(teacher.orElse(null));
     }
 
     @Transactional
     public TeacherDto save(TeacherDto teacher) {
-        Teacher newTeacher = getTeacher(teacher);
+        Teacher newTeacher = teacherMapper.toEntity(teacher);
         Teacher savedTeacher = teacherRepository.save(newTeacher);
-        return getTeacherDto(savedTeacher);
+        return teacherMapper.toDto(savedTeacher);
     }
 
     @Transactional
-    public void deleteTeacher(Integer id) {
+    public void delete(Integer id) {
         teacherRepository.deleteById(id);
     }
 
     @Transactional
-    public TeacherDto updateTeacher(Integer id, TeacherDto teacherDto) {
+    public TeacherDto update(Integer id, TeacherDto teacherDto) {
         Teacher teacher = teacherRepository.findById(id)
                 .map(existingTeacher -> {
                     existingTeacher.setName(teacherDto.getName());
@@ -51,24 +57,7 @@ public class TeacherServices {
                     return teacherRepository.save(existingTeacher);
                 })
                 .orElseThrow(() -> new RuntimeException("not found"));
-        return getTeacherDto(teacher);
+        return teacherMapper.toDto(teacher);
     }
 
-    public Teacher getTeacher(TeacherDto teacherDto) {
-        Teacher teacher = new Teacher();
-        teacher.setId(teacherDto.getId());
-        teacher.setName(teacherDto.getName());
-        teacher.setAge(teacherDto.getAge());
-        teacher.setEmail(teacherDto.getEmail());
-        return teacher;
-    }
-
-    public TeacherDto getTeacherDto(Teacher teacher) {
-        TeacherDto teacherDto = new TeacherDto();
-        teacherDto.setId(teacher.getId());
-        teacherDto.setName(teacher.getName());
-        teacherDto.setAge(teacher.getAge());
-        teacherDto.setEmail(teacher.getEmail());
-        return teacherDto;
-    }
 }
