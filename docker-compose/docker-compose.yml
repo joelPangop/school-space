@@ -29,6 +29,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://schoolspace-db.c6f8qe264enx.us-east-1.rds.amazonaws.com:3306/schoolspace
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Abc123...
+      DB_HOST: schoolspace-db.c6f8qe264enx.us-east-1.rds.amazonaws.com
+      DB_USER: root
+      DB_PASSWORD: Abc123...
     labels:
       ARTIFACT_CATEGORY: Computation
       Replicas: 1
