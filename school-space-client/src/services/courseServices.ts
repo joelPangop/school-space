@@ -2,7 +2,8 @@ import axios from "axios";
 import {Course} from "../models/Course";
 import {Student} from "../models/Student";
 
-const BASE_URL = `${process.env.REACT_APP_API_URL}/api/course` || 'http://localhost:8080/api/course';
+const rest_path = 'api/course';
+const BASE_URL = `${process.env.REACT_APP_API_URL}/${rest_path}` || `http://localhost:8080/${rest_path}` || `http://3.80.90.228:3000/${rest_path}`;
 
 export const getCourses = async (): Promise<Course[]> => {
     const response = await axios.get(`${BASE_URL}`);
