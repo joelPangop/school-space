@@ -1,18 +1,17 @@
 services:
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: Abc123...
-      MYSQL_DATABASE: studentdb
-    ports:
-      - "3307:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - backend
+  #mysql:
+    #image: mysql:8
+  #  environment:
+  #    MYSQL_DATABASE: schoolspacedb
+  #  ports:
+ #     - "3307:3306"
+  #  healthcheck:
+  #    test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+  #    interval: 10s
+   #   timeout: 5s
+  #    retries: 5
+  #  networks:
+  #    - backend
 
   schoolspaceservices:
     build:
@@ -22,11 +21,12 @@ services:
     image: schoolspaceservices
     ports:
       - "8080:8080"
-    depends_on:
-      mysql:
-        condition: service_healthy
+   ## depends_on:
+     # mysql:
+     #   condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/studentdb?useSSL=false&serverTimezone=UTC
+      #SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/schoolspacedb?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://schoolspace-db.c6f8qe264enx.us-east-1.rds.amazonaws.com:3306/schoolspace
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Abc123...
     labels:
