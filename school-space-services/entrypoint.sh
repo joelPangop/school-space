@@ -2,6 +2,10 @@
 
 echo "⌛ Attente que MySQL soit prêt..."
 
+DB_HOST=${DB_HOST:-localhost}
+DB_USER=${DB_USER:-root}
+DB_PASSWORD=${DB_PASSWORD:-password}
+
 until mysqladmin ping -h "mysql" -u "root" -p"Abc123..." --silent; do
   echo "⏳ MySQL n'est pas encore prêt. Nouvelle tentative dans 5s..."
   sleep 5
