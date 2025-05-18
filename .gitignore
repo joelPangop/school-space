@@ -1,0 +1,6 @@
+# Fichiers générés à NE PAS versionner
+./infra/aws-terraform/.terraform/
+./school-space-client/node_modules
+*.tfstate
+*.tfstate.backup
+*.lock.hcl

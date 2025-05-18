@@ -1,0 +1,22 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.lock.hcl
+*.tfvars
+
+# Sécurité
+*.pem
+.secrets/
+
+# Node & Java
+node_modules/
+dist/
+build/
+target/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
