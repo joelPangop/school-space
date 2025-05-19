@@ -2,7 +2,7 @@ import axios from "axios";
 import {Teacher} from "../models/Teacher";
 
 const rest_path = 'api/teacher';
-const BASE_URL = `${process.env.REACT_APP_API_URL}/${rest_path}` || `http://localhost:8080/${rest_path}` || `http://http://34.238.242.234/:8080/${rest_path}`;
+const BASE_URL = `${process.env.REACT_APP_API_URL}/${rest_path}` || `http://localhost:8080/${rest_path}` || `http://34.238.242.234:8080/${rest_path}`;
 
 export const getTeachers = async (): Promise<Teacher[]> => {
     const response = await axios.get(`${BASE_URL}`);
