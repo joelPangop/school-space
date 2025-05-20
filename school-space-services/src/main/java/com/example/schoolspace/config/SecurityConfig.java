@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class SecurityConfig {
 
-    @Value("${frontend.url:http://localhost:3000}")
+    @Value("${frontend.url:#{null}}")
     private String frontendUrl;
 
     @Bean
@@ -32,8 +32,10 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
+        String allowedOrigin = (frontendUrl != null) ? frontendUrl : "http://localhost:3000";
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(frontendUrl)); // 👈 ton frontend
+        config.setAllowedOrigins(List.of(allowedOrigin)); // 👈 ton frontend
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
 
