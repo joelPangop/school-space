@@ -32,7 +32,6 @@ services:
       DB_HOST: schoolspace-db.c6f8qe264enx.us-east-1.rds.amazonaws.com
       DB_USER: root
       DB_PASSWORD: Abc123...
-      FRONTEND_URL=http://$(curl http://169.254.169.254/latest/meta-data/public-ipv4):3000
     labels:
       ARTIFACT_CATEGORY: Computation
       Replicas: 1
