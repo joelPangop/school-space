@@ -1,15 +1,16 @@
+#!/bin/bash
+
 echo "📥 Pull Git..."
+cd /home/ec2-user/school-space || exit 1
 git pull origin master
 
 docker compose down
-
-#!/bin/bash
 
 # Récupère l'IP publique de l'instance EC2 depuis le Metadata service
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
 # Chemin vers le dossier du frontend
-CLIENT_DIR="../school-space-client"
+CLIENT_DIR="./school-space-client"
 
 # Build de l'image Docker avec l'URL backend injectée dynamiquement
 echo "➡️  Public IP EC2: $PUBLIC_IP"
@@ -18,15 +19,14 @@ echo "➡️  Building schoolspaceclient with API URL: http://$PUBLIC_IP:8080"
 docker build \
   --build-arg REACT_APP_API_URL=http://$PUBLIC_IP:8080 \
   -t schoolspaceclient \
-  "$CLIENT_DIR"
-
+  "$CLIENT_DIR" || exit 1
 
 echo "🧪 Build backend..."
-cd school-space-services
+cd ./school-space-services || exit 1
 ./mvnw clean package -DskipTests || exit 1
 cd ..
 
 echo "🐳 Docker Compose..."
-docker compose up --build
+docker compose up --build -d
 
 echo "✅ Fini !"
