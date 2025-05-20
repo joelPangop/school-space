@@ -4,29 +4,32 @@ echo "📥 Pull Git..."
 cd /home/ec2-user/school-space || exit 1
 git pull origin master
 
-docker compose down
+echo "⛔️ Arrêt des conteneurs..."
+docker-compose down
 
-# Récupère l'IP publique de l'instance EC2 depuis le Metadata service
+# Obtenir l'IP publique de l'EC2
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
-# Chemin vers le dossier du frontend
+# === Build du frontend React ===
 CLIENT_DIR="./school-space-client"
 
-# Build de l'image Docker avec l'URL backend injectée dynamiquement
-echo "➡️  Public IP EC2: $PUBLIC_IP"
-echo "➡️  Building schoolspaceclient with API URL: http://$PUBLIC_IP:8080"
+echo "🌍 IP Publique EC2 : $PUBLIC_IP"
+echo "🛠️ Build schoolspaceclient avec REACT_APP_API_URL=$PUBLIC_IP:8080"
 
 docker build \
   --build-arg REACT_APP_API_URL=http://$PUBLIC_IP:8080 \
   -t schoolspaceclient \
   "$CLIENT_DIR" || exit 1
 
+# === Build du backend Spring Boot ===
 echo "🧪 Build backend..."
 cd ./school-space-services || exit 1
+chmod +x mvnw
 ./mvnw clean package -DskipTests || exit 1
 cd ..
 
-echo "🐳 Docker Compose..."
-docker compose up --build -d
+# === Docker Compose ===
+echo "🐳 Lancement des conteneurs..."
+docker-compose up --build
 
-echo "✅ Fini !"
+echo "✅ Déploiement terminé avec succès !"
