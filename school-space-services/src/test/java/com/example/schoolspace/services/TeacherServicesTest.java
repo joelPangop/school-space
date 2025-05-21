@@ -1,11 +1,9 @@
 package com.example.schoolspace.services;
 
-import com.example.schoolspace.dto.IMapper;
 import com.example.schoolspace.dto.TeacherDto;
 import com.example.schoolspace.dto.TeacherMapper;
 import com.example.schoolspace.model.Teacher;
 import com.example.schoolspace.repository.TeacherRepository;
-import com.example.schoolspace.service.IServices;
 import com.example.schoolspace.service.TeacherServices;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

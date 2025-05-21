@@ -4,6 +4,10 @@ spring:
     driver-class-name: org.h2.Driver
     username: root
     password: Abc123...
+  security:
+    user:
+      name: testuser
+      password: testpass
   jpa:
     hibernate:
       ddl-auto: create-drop
