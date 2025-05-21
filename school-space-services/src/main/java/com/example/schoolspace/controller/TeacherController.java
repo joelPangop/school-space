@@ -12,23 +12,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/teacher")
-public class TeacherController {
+public class TeacherController extends AbstractController<TeacherDto>{
 
     @Autowired
     private TeacherServices teacherServices;
 
+    @Override
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public List<TeacherDto> getAllTeachers() {
+    public List<TeacherDto> getAll() {
         return teacherServices.getAll();
     }
 
+    @Override
     @GetMapping("/{id}")
-    public TeacherDto getTeacherById(@PathVariable Integer id) {
+    public TeacherDto getById(@PathVariable Integer id) {
         return teacherServices.getById(id);
     }
 
+    @Override
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
@@ -36,12 +39,14 @@ public class TeacherController {
         return teacherServices.save(teacher);
     }
 
+    @Override
     @PutMapping("/{id}")
     public ResponseEntity<TeacherDto> update(@PathVariable Integer id, @RequestBody TeacherDto teacher) {
         TeacherDto updateTeacher = teacherServices.update(id, teacher);
         return ResponseEntity.ok(updateTeacher);
     }
 
+    @Override
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         teacherServices.delete(id);
