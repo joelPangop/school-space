@@ -55,7 +55,7 @@ resource "aws_instance" "school_space_server" {
 }
 
 resource "aws_security_group" "allow_http_ssh" {
-  name        = "allow_http_ssh"
+  name        = "allow_http_ssh_v2"
   description = "Allow SSH (22), HTTP (80), 8080, 3000"
 
   ingress {

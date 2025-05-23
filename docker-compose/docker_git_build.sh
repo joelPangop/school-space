@@ -30,6 +30,6 @@ cd ..
 
 # === Docker Compose ===
 echo "🐳 Lancement des conteneurs..."
-
+docker-compose up
 
 echo "✅ Déploiement terminé avec succès !"
