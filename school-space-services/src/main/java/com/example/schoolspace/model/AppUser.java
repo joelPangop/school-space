@@ -14,6 +14,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class AppUser extends AbstractEntity{
+
+    @JsonProperty("_firstname")
+    private String firstname;
+
+    @JsonProperty("_lastname")
+    private String lastname;
+
     @Column(unique = true)
     @JsonProperty("_email")
     private String email;
@@ -23,6 +30,22 @@ public class AppUser extends AbstractEntity{
 
     @JsonProperty("_role")
     private String role;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public String getEmail() {
         return email;

@@ -2,6 +2,7 @@ package com.example.schoolspace.controller;
 
 import com.example.schoolspace.dto.AuthRequest;
 import com.example.schoolspace.dto.AuthResponse;
+import com.example.schoolspace.model.AppUser;
 import com.example.schoolspace.service.UserDetailsService;
 import com.example.schoolspace.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,23 @@ public class AuthController extends AbstractController<AuthRequest> {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest request) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-            );
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+//        try {
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+//            );
+//        } catch (AuthenticationException e) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+//        }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = jwtUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthResponse(token));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthRequest> register(@RequestBody AuthRequest request) {
+        return ResponseEntity.ok(userDetailsService.save(request));
     }
 
 }

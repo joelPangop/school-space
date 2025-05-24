@@ -10,6 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AuthRequest extends Dto{
 
+    @JsonProperty("_firstname")
+    private String firstname;
+
+    @JsonProperty("_lastname")
+    private String lastname;
+
     @JsonProperty("_email")
     private String email;
 
@@ -18,6 +24,22 @@ public class AuthRequest extends Dto{
 
     @JsonProperty("_role")
     private String role;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public String getEmail() {
         return email;

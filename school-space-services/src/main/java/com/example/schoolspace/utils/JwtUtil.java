@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "my-secret-key"; // À sécuriser plus tard
+    private final String SECRET_KEY = "u1Y8jZ6ZiWhMM8323BI8O/G1E8PDBfHAGHvyA6TXWV0"; // À sécuriser plus tard
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()

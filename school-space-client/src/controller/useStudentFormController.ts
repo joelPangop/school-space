@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Student} from "../models/Student";
 import {createStudent, deleteStudent, getStudent, getStudents, updateStudent} from "../services/studentServices";
 import {useNavigate, useParams} from "react-router-dom";
+import AuthService from "../services/AuthService";
 
 export const useStudentFormController = () => {
     const {id} = useParams();
@@ -59,7 +60,6 @@ export const useStudentFormController = () => {
             await createStudent(student);
         }
         navigate("/");
-
     };
 
     const fetchStudents = async () => {
@@ -74,6 +74,7 @@ export const useStudentFormController = () => {
             });
             setStudents(Object.values(mapped));
         });
+
     };
 
     async function deleteItem(id: number) {

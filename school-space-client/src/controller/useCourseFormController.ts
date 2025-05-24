@@ -6,6 +6,7 @@ import {Student} from "../models/Student";
 import {getStudents} from "../services/studentServices";
 import {getTeachers} from "../services/teacherServices";
 import {Teacher} from "../models/Teacher";
+import AuthService from "../services/AuthService";
 
 export const useCourseFormController = () =>{
     const {id} = useParams();
@@ -25,9 +26,12 @@ export const useCourseFormController = () =>{
                 setCourse(originalCours);
             }
         };
-        fetchCours();
-        fetchStudents();
-        fetchTeachers();
+        AuthService.fetchWithAuth('/api/course').then(async (response) => {
+            console.log("response.data:", response);
+            fetchCours();
+            fetchStudents();
+            fetchTeachers();
+        });
     }, [id]);
 
     const [courses, setCourses] = useState<Course[]>([]);
@@ -64,12 +68,15 @@ export const useCourseFormController = () =>{
 
         // const jsonPayload = course.toJson();
         // console.log('Données du Course :', jsonPayload);
-        if (id) {
-            await updateCourse(parseInt(id), course);
-        } else {
-            await createCourse(course);
-        }
-        navigate("/courses");
+        AuthService.fetchWithAuth('/api/course').then(async (response) => {
+            console.log("response.data:", response);
+            if (id) {
+                await updateCourse(parseInt(id), course);
+            } else {
+                await createCourse(course);
+            }
+            navigate("/courses");
+        });
     }
 
     const handleStudentCheckboxChange = (student: Student, checked: boolean) => {

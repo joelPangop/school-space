@@ -1,7 +1,6 @@
 package com.example.schoolspace.controller;
 
 import com.example.schoolspace.dto.StudentDto;
-import com.example.schoolspace.model.Student;
 import com.example.schoolspace.service.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

@@ -4,6 +4,7 @@ import {Teacher} from "../models/Teacher";
 import {createTeacher, deleteTeacher, getTeacher, getTeachers, updateTeacher} from "../services/teacherServices";
 import {getStudents} from "../services/studentServices";
 import {Student} from "../models/Student";
+import AuthService from "../services/AuthService";
 
 export const useTeacherFormController = () => {
     const {id} = useParams();
@@ -21,7 +22,10 @@ export const useTeacherFormController = () => {
                 setTeacher(originalTeacher);
             }
         };
-        fetchTeacher();
+        AuthService.fetchWithAuth('/api/teacher').then((response) => {
+            console.log("response.data:", response);
+            fetchTeacher();
+        })
     }, [id]);
 
     const [teachers, setTeachers] = useState<Teacher[]>([]);
@@ -61,13 +65,15 @@ export const useTeacherFormController = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Données du Teacher :', teacher);
-        if (id) {
-            await updateTeacher(parseInt(id), teacher);
-        } else {
-            await createTeacher(teacher);
-        }
-        navigate("/teachers");
-
+        AuthService.fetchWithAuth('/api/teacher').then(async (response) => {
+            console.log("response.data:", response);
+            if (id) {
+                await updateTeacher(parseInt(id), teacher);
+            } else {
+                await createTeacher(teacher);
+            }
+            navigate("/teachers");
+        })
     };
 
     const fetchTeachers = async () => {
