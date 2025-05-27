@@ -1,4 +1,4 @@
 // @ts-ignore
-const API_BASE_URL = `http://3.82.165.139:3000/${rest_path}`;
-// const API_BASE_URL = `${process.env.REACT_APP_API_URL}/${rest_path}`;
+// const API_BASE_URL = `http://54.165.49.100:3000/${rest_path}`;
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/${rest_path}` || "http://localhost:8080";
 export default API_BASE_URL;
