@@ -38,15 +38,16 @@ public class AuthController extends AbstractController<AuthRequest> {
 //        } catch (AuthenticationException e) {
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
 //        }
-
+        System.out.println("Login attempt for user: " + request.getEmail());
         UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         String token = jwtUtil.generateToken(userDetails);
-
+        System.out.println("Generated token for user: " + request.getEmail() + " - Token: " + token);
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthRequest> register(@RequestBody AuthRequest request) {
+        System.out.println("Registering user: " + request.getEmail());
         return ResponseEntity.ok(userDetailsService.save(request));
     }
 

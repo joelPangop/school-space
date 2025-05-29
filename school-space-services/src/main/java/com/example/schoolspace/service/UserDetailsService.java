@@ -57,6 +57,7 @@ public class UserDetailsService implements org.springframework.security.core.use
     public AuthRequest save(AuthRequest authRequest) {
         AppUser newAppUser = appUserMapper.toEntity(authRequest);
         AppUser savedAppUser = userRepository.save(newAppUser);
+        System.out.println("Saved user: " + savedAppUser.getEmail() + " with role: " + savedAppUser.getRole());
         return appUserMapper.toDto(savedAppUser);
     }
 
