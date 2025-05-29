@@ -8,6 +8,8 @@ spring:
     user:
       name: testuser
       password: testpass
+  frontend:
+    url=${FRONTEND_URL}:
   jpa:
     hibernate:
       ddl-auto: create-drop

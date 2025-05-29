@@ -44,6 +44,7 @@ public class StudentServices implements IServices<StudentDto, Student>{
     public StudentDto save(StudentDto studentDto) {
         Student student = studentMapper.toEntity(studentDto);
         Student newStudent = studentRepository.save(student);
+        System.out.println("Saved student: " + newStudent.getName() + " with email: " + newStudent.getEmail());
         return studentMapper.toDto(newStudent);
     }
 
