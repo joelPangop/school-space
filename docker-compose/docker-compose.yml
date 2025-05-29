@@ -34,7 +34,7 @@ services:
       DB_USER: root
       DB_PASSWORD: Abc123...
     env_file:
-  -   - .env
+      - .env
     labels:
       ARTIFACT_CATEGORY: Computation
       Replicas: 1

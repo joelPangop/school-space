@@ -10,6 +10,10 @@ docker-compose down
 # Obtenir l'IP publique de l'EC2
 PUBLIC_IP=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
+# Générer le fichier .env avec FRONTEND_URL
+echo "FRONTEND_URL=http://$PUBLIC_IP:3000" > .env
+echo "✅ Fichier .env généré avec FRONTEND_URL=http://$PUBLIC_IP:3000"
+
 # === Build du frontend React ===
 CLIENT_DIR="./school-space-client"
 
@@ -31,6 +35,6 @@ cd ..
 
 # === Docker Compose ===
 echo "🐳 Lancement des conteneurs..."
-docker-compose up
+docker-compose up -d
 
 echo "✅ Déploiement terminé avec succès !"
