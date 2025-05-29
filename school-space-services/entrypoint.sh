@@ -12,4 +12,7 @@ until mysqladmin ping -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASSWORD" --silent; do
 done
 
 echo "✅ MySQL est prêt. Lancement de l'application Spring Boot..."
-exec java -jar app.jar
+#exec java -jar app.jar
+exec java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 \
+     -jar app.jar
+
