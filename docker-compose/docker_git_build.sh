@@ -28,7 +28,7 @@ echo "🛠️ Build schoolspaceclient avec REACT_APP_API_URL=http://$PUBLIC_IP:8
 docker build \
   --build-arg REACT_APP_API_URL=http://$PUBLIC_IP:8080 \
   -t schoolspaceclient \
-  -f school-space-client/Dockerfile \
+  -f ./school-space-client/Dockerfile \
   --no-cache \
   school-space-client || exit 1
 
