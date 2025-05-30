@@ -93,13 +93,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: ⚖️ Set up SSH for EC2
-        uses: webfactory/ssh-agent@v0.8.1
+        uses:  webfactory/ssh-agent@v0.5.4
         with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          ssh-private-key: C:\Users\User\WorkSpace\school-space\infra\aws-terraform\.secrets\devops-joel.pem
 
       - name: 🚀 Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ec2-user@44.206.247.68 << 'EOF'
             cd /home/ec2-user/school-space
             chmod +x docker-compose/docker_git_build.sh
             ./docker-compose/docker_git_build.sh
