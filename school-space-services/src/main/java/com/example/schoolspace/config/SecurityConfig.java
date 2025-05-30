@@ -95,7 +95,7 @@ public class SecurityConfig {
         System.out.println("✅ CORS Config actif pour: " + frontendUrl);
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:3000",
-                "http://44.206.247.68:3000",
+                "http://174.129.79.126:3000",
                 frontendUrl != null ? "http://"+frontendUrl+":3000" : "http://localhost:3000"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
