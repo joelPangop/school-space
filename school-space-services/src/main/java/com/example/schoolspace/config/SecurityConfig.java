@@ -92,6 +92,7 @@ public class SecurityConfig {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public CorsFilter corsFilter() {
         CorsConfiguration configuration = new CorsConfiguration();
+        System.out.println("✅ CORS Config actif pour: " + frontendUrl);
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:3000",
                 "http://44.206.247.68:3000",
