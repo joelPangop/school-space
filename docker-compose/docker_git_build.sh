@@ -3,6 +3,9 @@
 # Se placer dans le dossier du script
 cd "$(dirname "$0")" || exit 1
 
+# Remonter à la racine du projet
+cd .. || exit 1
+
 echo "📥 Pull Git..."
 git pull origin master
 
