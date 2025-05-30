@@ -28,8 +28,9 @@ echo "🛠️ Build schoolspaceclient avec REACT_APP_API_URL=http://$PUBLIC_IP:8
 docker build \
   --build-arg REACT_APP_API_URL=http://$PUBLIC_IP:8080 \
   -t schoolspaceclient \
+  -f school-space-client/Dockerfile \
   --no-cache \
-  $CLIENT_DIR || exit 1
+  school-space-client || exit 1
 
 # === Build du backend Spring Boot ===
 echo "🧪 Build backend..."
