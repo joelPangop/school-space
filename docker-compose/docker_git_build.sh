@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Se placer dans le dossier du script
 cd "$(dirname "$0")" || exit 1
 
 echo "📥 Pull Git..."
@@ -19,13 +20,13 @@ echo "✅ Fichier .env généré avec FRONTEND_URL=http://$PUBLIC_IP:3000"
 CLIENT_DIR="./school-space-client"
 
 echo "🌍 IP Publique EC2 : $PUBLIC_IP"
-echo "🛠️ Build schoolspaceclient avec REACT_APP_API_URL=$PUBLIC_IP:8080"
+echo "🛠️ Build schoolspaceclient avec REACT_APP_API_URL=http://$PUBLIC_IP:8080"
 
 docker build \
   --build-arg REACT_APP_API_URL=http://$PUBLIC_IP:8080 \
   -t schoolspaceclient \
   --no-cache \
-  "$CLIENT_DIR" || exit 1
+  $CLIENT_DIR || exit 1
 
 # === Build du backend Spring Boot ===
 echo "🧪 Build backend..."
