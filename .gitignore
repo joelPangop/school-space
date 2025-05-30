@@ -4,3 +4,4 @@
 *.tfstate
 *.tfstate.backup
 *.lock.hcl
+"infra/aws-terraform/.secrets/" 
