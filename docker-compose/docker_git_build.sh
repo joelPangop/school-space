@@ -1,7 +1,8 @@
 #!/bin/bash
 
+cd "$(dirname "$0")" || exit 1
+
 echo "📥 Pull Git..."
-cd /home/ec2-user/school-space || exit 1
 git pull origin master
 
 echo "⛔️ Arrêt des conteneurs..."

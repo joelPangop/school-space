@@ -15,7 +15,7 @@ RUN npm ci
 COPY . .
 
 # Build the app using the injected REACT_APP_API_URL
-RUN npm run build
+RUN REACT_APP_API_URL=$REACT_APP_API_URL npm run build
 
 # ---------- Stage 2: Serve with Nginx ----------
 FROM nginx:alpine
