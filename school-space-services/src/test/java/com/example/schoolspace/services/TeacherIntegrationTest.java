@@ -1,5 +1,6 @@
 package com.example.schoolspace.services;
 
+import com.example.schoolspace.StudentSpaceApplication;
 import com.example.schoolspace.dto.TeacherDto;
 import com.example.schoolspace.repository.TeacherRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +16,10 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(
+        properties = "FRONTEND_URL=http://localhost:3000",
+        classes = StudentSpaceApplication.class
+)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class TeacherIntegrationTest {
