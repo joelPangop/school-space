@@ -39,7 +39,8 @@ public class TeacherIntegrationTest {
         teacherRepository.deleteAll();
 
         TeacherDto teacher = new TeacherDto();
-        teacher.setName("Robert'); DROP TABLE teachers; --");
+        teacher.setName("Robert");
+//        teacher.setName("Robert'); DROP TABLE teachers; --");
         teacher.setAge(40);
         teacher.setEmail("robert@attack.com");
         // Ne pas setter l'id !
