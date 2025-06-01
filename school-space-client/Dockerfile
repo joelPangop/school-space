@@ -17,14 +17,14 @@ COPY . .
 # 🔥 Supprimer le dossier build au cas où il existe
 RUN rm -rf build
 
-# Build the app using the injected REACT_APP_API_URL
-RUN REACT_APP_API_URL=$REACT_APP_API_URL npm run build
-
 # ---------- Stage 2: Serve with Nginx ----------
 FROM nginx:alpine
 
 # Copy built files from previous stage
 COPY --from=build /app/build /usr/share/nginx/html
+
+# Build the app using the injected REACT_APP_API_URL
+RUN REACT_APP_API_URL=$REACT_APP_API_URL npm run build
 
 # Custom Nginx config (optional)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
