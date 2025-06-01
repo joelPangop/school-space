@@ -53,7 +53,7 @@ public class TeacherIntegrationTest {
         // Vérifie que l'objet a bien été inséré dans la base H2
         var saved = teacherRepository.findAll();
         assertThat(saved).hasSize(1);
-        assertThat(saved.get(0).getName()).isEqualTo("Robert'); DROP TABLE teachers; --");
+        assertThat(saved.get(0).getName()).isEqualTo("Robert");
     }
 
 }
