@@ -14,6 +14,9 @@ RUN npm ci
 # Copy the rest of the source
 COPY . .
 
+# 🔥 Supprimer le dossier build au cas où il existe
+RUN rm -rf build
+
 # Build the app using the injected REACT_APP_API_URL
 RUN REACT_APP_API_URL=$REACT_APP_API_URL npm run build
 
