@@ -23,7 +23,7 @@ public class StudentSpaceApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://34.238.242.234:3000")
+                        .allowedOrigins("http://35.174.167.123:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
