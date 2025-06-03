@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schoolspace-frontend
+  namespace: school-space
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schoolspace-frontend
+  template:
+    metadata:
+      labels:
+        app: schoolspace-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: <DOCKER_USERNAME>/schoolspaceclient:latest
+          ports:
+            - containerPort: 80
