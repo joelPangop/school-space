@@ -1,5 +1,6 @@
 package com.example.schoolspace;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EntityScan(basePackages = "com.example.schoolspace.model")
 @EnableJpaRepositories(basePackages = "com.example.schoolspace.repository")
 public class StudentSpaceApplication {
+    @Value("${frontend.url:#{null}}")
+    private String frontendUrl;
 
     public static void main(String[] args) {
         SpringApplication.run(StudentSpaceApplication.class, args);
@@ -23,7 +26,7 @@ public class StudentSpaceApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://35.174.167.123:3000")
+                        .allowedOrigins("http://34.207.145.183:3000", "http://localhost:3000", frontendUrl)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }

@@ -1,5 +1,6 @@
+
 resource "aws_db_subnet_group" "schoolspace_db_subnet_group" {
-  name       = "schoolspace-subnet-group"
+  name       = "schoolspace-subnet-${random_id.suffix.hex}"
   subnet_ids = data.aws_subnets.default.ids
 
   tags = {
@@ -8,7 +9,7 @@ resource "aws_db_subnet_group" "schoolspace_db_subnet_group" {
 }
 
 resource "aws_db_instance" "schoolspace_db" {
-  identifier         = "schoolspace-db"
+  identifier         = "schoolspace-db-${random_id.suffix.hex}"
   engine             = "mysql"
   instance_class     = "db.t3.micro"
   allocated_storage  = 20
@@ -23,10 +24,14 @@ resource "aws_db_instance" "schoolspace_db" {
   tags = {
     Name = "SchoolSpaceRDS"
   }
+  
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_security_group" "allow_mysql" {
-  name        = "allow_mysql"
+  name        = "allow_mysql_${random_id.suffix.hex}"
   description = "Allow MySQL traffic"
   ingress {
     from_port   = 3306
@@ -39,5 +44,8 @@ resource "aws_security_group" "allow_mysql" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  lifecycle {
+    create_before_destroy = true
   }
 }
